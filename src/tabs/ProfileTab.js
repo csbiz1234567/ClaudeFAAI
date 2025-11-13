@@ -1,7 +1,6 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { toNum, fmtSGD, monthNames, parseDob, monthsSinceDob } from '../utils/helpers.js';
-import { getCpfRates, getCPFRates, getCpfAllocation, computeCpf } from '../utils/cpf.js';
-import Card from '../components/Card.js';
+import React, { useState, useMemo } from 'react';
+import { toNum, fmtSGD, parseDob, monthsSinceDob } from '../utils/helpers.js';
+import { getCpfRates } from '../utils/cpf.js';
 import LabeledText from '../components/LabeledText.js';
 import LabeledSelect from '../components/LabeledSelect.js';
 import LineChart from '../components/LineChart.js';
@@ -35,7 +34,7 @@ const monthlyRetirementExpenses = profile.customRetirementExpense && toNum(profi
 : (cpfData ? cpfData.takeHome * 0.7 : 0));
 
 const yearsToRetirement = Math.max(1, toNum(profile.retirementAge, 65) - age);
-const lifeExpectancy = profile.gender === ‘female’ ? 86 : 82;
+const lifeExpectancy = profile.gender === 'female' ? 86 : 82;
 const inflationRate = 0.03;
 
 const futureMonthlyRetirementExpenses = monthlyRetirementExpenses * Math.pow(1 + inflationRate, yearsToRetirement);
@@ -95,18 +94,18 @@ return (
 <div style={{ padding: 20 }}>
 {/* Welcome Banner */}
 <div style={{
-background: ‘linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)’,
-border: ‘1px solid #3b82f6’,
+background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+border: '1px solid #3b82f6',
 borderRadius: 12,
 padding: 24,
 marginBottom: 20,
-boxShadow: ‘0 2px 8px rgba(0,0,0,0.04)’
+boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
 }}>
-<div style={{ display: ‘flex’, alignItems: ‘center’, gap: 12 }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 <div style={{ fontSize: 32 }}>👋</div>
 <div>
-<h3 style={{ margin: 0, color: ‘#1e40af’, fontSize: 20 }}>Let’s Get to Know You</h3>
-<p style={{ margin: ‘4px 0 0’, color: ‘#1e40af’, fontSize: 14, opacity: 0.8 }}>
+<h3 style={{ margin: 0, color: '#1e40af', fontSize: 20 }}>Let's Get to Know You</h3>
+<p style={{ margin: '4px 0 0', color: '#1e40af', fontSize: 14, opacity: 0.8 }}>
 Your personal details help us create a customized financial roadmap
 </p>
 </div>
@@ -1673,5 +1672,61 @@ Your personal details help us create a customized financial roadmap
                   childName: child.name || 'Youngest child'
                 };
               }
+            });
+
+            if (latestRetirement.year === 0) return null;
+            const standardRetirementAge = toNum(profile.retirementAge, 65);
+            const delayedYears = Math.max(0, latestRetirement.age - standardRetirementAge);
+
+            return (
+              <div style={{ fontSize: 14, color: '#0c4a6e', lineHeight: 1.7 }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.7)', padding: 14, borderRadius: 8, marginBottom: 12 }}>
+                  <div style={{ fontWeight: 600, marginBottom: 8 }}>
+                    📅 Standard Retirement Plan: Age {standardRetirementAge}
+                  </div>
+                  <div style={{ fontSize: 13, opacity: 0.9 }}>
+                    This is when most people retire, but with children, your timeline may differ.
+                  </div>
+                </div>
+                <div style={{
+                  background: delayedYears > 0 ? 'rgba(251, 191, 36, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                  padding: 14,
+                  borderRadius: 8,
+                  border: delayedYears > 0 ? '2px solid #f59e0b' : '2px solid #10b981'
+                }}>
+                  <div style={{ fontWeight: 700, marginBottom: 8, fontSize: 15 }}>
+                    {delayedYears > 0 ? '⚠️' : '✅'} Your Realistic Retirement: Age {latestRetirement.age} ({latestRetirement.year})
+                  </div>
+                  <div style={{ fontSize: 13, marginBottom: 6 }}>
+                    {latestRetirement.childName} finishes university in {latestRetirement.year} when you'll be {latestRetirement.age} years old.
+                  </div>
+                  {delayedYears > 0 ? (
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e' }}>
+                      ⏰ That's {delayedYears} {delayedYears === 1 ? 'year' : 'years'} later than standard retirement! 
+                      Plan your savings to last from age {latestRetirement.age}, not {standardRetirementAge}.
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#065f46' }}>
+                      🎉 Great news! You can retire at or before standard retirement age while supporting your children's education.
+                    </div>
+                  )}
+                </div>
+                <div style={{ marginTop: 12, padding: 12, background: 'rgba(59, 130, 246, 0.1)', borderRadius: 6 }}>
+                  <div style={{ fontSize: 12, fontStyle: 'italic', opacity: 0.9 }}>
+                    💡 <strong>Pro Tip:</strong> Check the Children tab for a detailed timeline showing exactly when each education cost hits!
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+);
+};
+
 
 export default ProfileTab;

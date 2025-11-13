@@ -33,20 +33,20 @@ return diffDays;
 
 return (
 <div style={{ padding: 20 }}>
-<div style={{ display: ‘flex’, justifyContent: ‘space-between’, alignItems: ‘center’, marginBottom: 20 }}>
-<h2 style={{ fontSize: 20, fontWeight: 700, color: ‘#1F2937’ }}>Client Management</h2>
+<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+<h2 style={{ fontSize: 20, fontWeight: 700, color: '#1F2937' }}>Client Management</h2>
 <button
 onClick={newClient}
 style={{
-padding: ‘10px 20px’,
-background: ‘linear-gradient(135deg, #667eea 0%, #764ba2 100%)’,
-color: ‘#fff’,
-border: ‘none’,
+padding: '10px 20px',
+background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+color: '#fff',
+border: 'none',
 borderRadius: 8,
 fontSize: 14,
 fontWeight: 600,
-cursor: ‘pointer’,
-boxShadow: ‘0 2px 4px rgba(102, 126, 234, 0.3)’
+cursor: 'pointer',
+boxShadow: '0 2px 4px rgba(102, 126, 234, 0.3)'
 }}
 >
 + New Client

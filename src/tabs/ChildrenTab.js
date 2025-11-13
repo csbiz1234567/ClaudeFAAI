@@ -10,7 +10,7 @@ const safeChildren = children || [];
 
 // Add, remove, update logic
 const addChild = () => {
-setChildren([…safeChildren, { id: Date.now(), name: ‘’, dobISO: ‘’, gender: ‘male’ }]);
+setChildren([...safeChildren, { id: Date.now(), name: '', dobISO: '', gender: 'male' }]);
 };
 
 const removeChild = (id) => {
@@ -18,7 +18,7 @@ setChildren(safeChildren.filter(c => c.id !== id));
 };
 
 const updateChild = (id, field, value) => {
-setChildren(safeChildren.map(c => c.id === id ? { …c, [field]: value } : c));
+setChildren(safeChildren.map(c => c.id === id ? { ...c, [field]: value } : c));
 };
 
 // Cost calculation, inflation, milestones
@@ -118,7 +118,7 @@ costs: calculateChildCosts(child)
 
 const grandTotal = allChildrenCosts.reduce((sum, c) => sum + c.costs.totalCost, 0);
 
-// Timeline with realistic “when do you retire”
+// Timeline with realistic "when do you retire"
 const calculateRetirementTimeline = () => {
 if (!ageYears || allChildrenCosts.length === 0) return null;
 const currentYear = new Date().getFullYear();
@@ -160,17 +160,17 @@ return (
 <div style={{ padding: 20 }}>
 {/* Welcome */}
 <div style={{
-background: ‘linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)’,
-border: ‘1px solid #f59e0b’,
+background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+border: '1px solid #f59e0b',
 borderRadius: 12,
 padding: 24,
 marginBottom: 20
 }}>
-<div style={{ display: ‘flex’, alignItems: ‘center’, gap: 12 }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 <div style={{ fontSize: 32 }}>👶</div>
 <div>
-<h3 style={{ margin: 0, color: ‘#92400e’, fontSize: 20 }}>Children & Education Planning</h3>
-<p style={{ margin: ‘4px 0 0’, color: ‘#92400e’, fontSize: 14, opacity: 0.8 }}>
+<h3 style={{ margin: 0, color: '#92400e', fontSize: 20 }}>Children & Education Planning</h3>
+<p style={{ margin: '4px 0 0', color: '#92400e', fontSize: 14, opacity: 0.8 }}>
 Factor in childcare, education costs with inflation up to university
 </p>
 </div>

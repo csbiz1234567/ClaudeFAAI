@@ -14,7 +14,7 @@ const [investmentPercent, setInvestmentPercent] = React.useState(retirement.inve
 // Update retirement object when percentage changes
 React.useEffect(() => {
 if (retirement.investmentPercent !== investmentPercent) {
-setRetirement({ …retirement, investmentPercent });
+setRetirement({ ...retirement, investmentPercent });
 }
 }, [investmentPercent]);
 
@@ -37,7 +37,7 @@ const monthlyInvestment = totalMonthlySavings * (toNum(investmentPercent, 100) /
 const currentAge = age;
 
 // Life expectancy based on gender
-const lifeExpectancy = profile.gender === ‘female’ ? 86 : 82;
+const lifeExpectancy = profile.gender === 'female' ? 86 : 82;
 const retirementYears = Math.max(0, lifeExpectancy - retirementAge);
 
 // Calculate estimated monthly retirement EXPENSES (70% of current expenses or custom from Profile)
@@ -71,29 +71,29 @@ const additionalMonthlyRequired = retirementGap > 0 && yearsToRetirement > 0
 : 0;
 
 const scenarios = [
-{ value: ‘conservative’, label: ‘Conservative (2.5%)’ },
-{ value: ‘moderate’, label: ‘Moderate (5.0%)’ },
-{ value: ‘aggressive’, label: ‘Aggressive (8.0%)’ }
+{ value: 'conservative', label: 'Conservative (2.5%)' },
+{ value: 'moderate', label: 'Moderate (5.0%)' },
+{ value: 'aggressive', label: 'Aggressive (8.0%)' }
 ];
 
 return (
 <div style={{ padding: 20 }}>
 {/* Header Banner */}
 <div style={{
-background: ‘linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)’,
-border: ‘2px solid #f59e0b’,
+background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+border: '2px solid #f59e0b',
 borderRadius: 12,
 padding: 24,
 marginBottom: 20,
-boxShadow: ‘0 4px 12px rgba(245, 158, 11, 0.15)’
+boxShadow: '0 4px 12px rgba(245, 158, 11, 0.15)'
 }}>
-<div style={{ display: ‘flex’, alignItems: ‘center’, gap: 12 }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 <div style={{ fontSize: 32 }}>🏖️</div>
 <div style={{ flex: 1 }}>
-<h3 style={{ margin: 0, color: ‘#92400e’, fontSize: 20, fontWeight: 700 }}>
-{profile.name ? `${profile.name}'s Retirement Plan` : ‘Your Retirement Plan’}
+<h3 style={{ margin: 0, color: '#92400e', fontSize: 20, fontWeight: 700 }}>
+{profile.name ? `${profile.name}'s Retirement Plan` : 'Your Retirement Plan'}
 </h3>
-<p style={{ margin: ‘4px 0 0’, color: ‘#92400e’, fontSize: 14, opacity: 0.8 }}>
+<p style={{ margin: '4px 0 0', color: '#92400e', fontSize: 14, opacity: 0.8 }}>
 Auto-synced from your Profile and Cashflow data
 </p>
 </div>

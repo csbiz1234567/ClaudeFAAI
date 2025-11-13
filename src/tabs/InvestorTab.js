@@ -2,45 +2,45 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { toNum, fmtSGD, monthNames, parseDob, monthsSinceDob } from '../utils/helpers.js';
 
 const InvestorTab = () => {
-const [portfolioValue, setPortfolioValue] = useState(‘500000’);
-const [portfolioType, setPortfolioType] = useState(‘stock-picking’); // stock-picking, diversified, index
+const [portfolioValue, setPortfolioValue] = useState('500000');
+const [portfolioType, setPortfolioType] = useState('stock-picking'); // stock-picking, diversified, index
 
 const value = toNum(portfolioValue, 0);
 
 // Volatility scenarios based on portfolio type
 const volatilityScenarios = {
-‘stock-picking’: {
-name: ‘Stock Picking (5-10 stocks)’,
+'stock-picking': {
+name: 'Stock Picking (5-10 stocks)',
 best: 0.30,      // +30% best case
 normal: 0.15,    // +15% normal bull market
 mild: -0.10,     // -10% correction
 moderate: -0.20, // -20% moderate drawdown
 severe: -0.35,   // -35% bear market
 crash: -0.50,    // -50% severe crash
-color: ‘#dc2626’,
-recovery: ‘2-5+ years’
+color: '#dc2626',
+recovery: '2-5+ years'
 },
-‘diversified’: {
-name: ‘Diversified Portfolio (20-50 stocks)’,
+'diversified': {
+name: 'Diversified Portfolio (20-50 stocks)',
 best: 0.25,
 normal: 0.12,
 mild: -0.08,
 moderate: -0.15,
 severe: -0.25,
 crash: -0.35,
-color: ‘#f59e0b’,
-recovery: ‘1-3 years’
+color: '#f59e0b',
+recovery: '1-3 years'
 },
-‘index’: {
-name: ‘Index Fund (S&P 500)’,
+'index': {
+name: 'Index Fund (S&P 500)',
 best: 0.20,
 normal: 0.10,
 mild: -0.05,
 moderate: -0.10,
 severe: -0.20,
 crash: -0.30,
-color: ‘#10b981’,
-recovery: ‘6-18 months’
+color: '#10b981',
+recovery: '6-18 months'
 }
 };
 
@@ -59,20 +59,20 @@ return (
 <div style={{ padding: 20 }}>
 {/* Header Banner */}
 <div style={{
-background: ‘linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)’,
-border: ‘2px solid #4f46e5’,
+background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
+border: '2px solid #4f46e5',
 borderRadius: 12,
 padding: 24,
 marginBottom: 20,
-boxShadow: ‘0 4px 12px rgba(79, 70, 229, 0.3)’
+boxShadow: '0 4px 12px rgba(79, 70, 229, 0.3)'
 }}>
-<div style={{ display: ‘flex’, alignItems: ‘center’, gap: 12 }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 <div style={{ fontSize: 48 }}>📈</div>
 <div style={{ flex: 1 }}>
-<h3 style={{ margin: 0, color: ‘#fff’, fontSize: 24, fontWeight: 700 }}>
+<h3 style={{ margin: 0, color: '#fff', fontSize: 24, fontWeight: 700 }}>
 Investor Education: Self-Directed vs Professional Management
 </h3>
-<p style={{ margin: ‘4px 0 0’, color: ‘#c7d2fe’, fontSize: 14 }}>
+<p style={{ margin: '4px 0 0', color: '#c7d2fe', fontSize: 14 }}>
 Understanding the realities of managing your own investments
 </p>
 </div>
